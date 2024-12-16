@@ -1,6 +1,10 @@
 import React from "react";
-
-function Card({ article }) {
+import { useNavigate } from "react-router-dom";
+function ArticleCard({ article }) {
+  const navigate = useNavigate()
+  const handleClick = (id)=>{
+  navigate(`/${id}`)
+  }
   return (
     <div className="container-fluid py-3" style={{ animation: "fadeIn 3s" }}>
       <h1 className="py-1 fs-1">Articles</h1>
@@ -32,6 +36,7 @@ function Card({ article }) {
                 Comment Count:
                 <span className="fs-6">{item.comment_count}</span>
               </h5>
+              <button type="button" className="btn btn-info" onClick={()=> handleClick(item.article_id)}>Read More</button>
             </div>
           </div>
         </div>)
@@ -42,4 +47,4 @@ function Card({ article }) {
   );
 }
 
-export default Card;
+export default ArticleCard;

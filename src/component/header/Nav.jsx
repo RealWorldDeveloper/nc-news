@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Nav() {
   return (
@@ -16,7 +17,7 @@ function Nav() {
       <div className="collapse navbar-collapse d-flex justify-content-center" id="navbarNavDropdown">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link"><strong>Home</strong></a>
+            <Link to={'/'} className="nav-link"><strong>Home</strong></Link>
           </li>
           <li className="nav-item">
             <a className="nav-link"><strong>Users</strong></a>
