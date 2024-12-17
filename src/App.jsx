@@ -1,10 +1,11 @@
 import { React, useState } from "react";
 import Header from "./component/header/Header";
 import Home from "./component/homepage/Home";
+import User from "./component/user/User";
 import Footer from "./component/footer/Footer";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Article_Card_id from "./component/homepage/Article_Card_id";
+import Article_Card_id from "./component/homepage/ArticleCardId";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
          <Route path="/" element = {<Home />}/>
          <Route path="/:article_id" element= {<Article_Card_id/>} />
+         <Route path="/users" element= {<User/>} />
         </Routes>
       </BrowserRouter>
     </>
