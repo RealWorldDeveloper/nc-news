@@ -22,9 +22,6 @@ function Nav() {
           <li className="nav-item">
             <a className="nav-link"><strong>Users</strong></a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link"><strong>Comments</strong></a>
-          </li>
         </ul>
       </div>
     </div>
