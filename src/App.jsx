@@ -5,7 +5,8 @@ import User from "./component/user/User";
 import Footer from "./component/footer/Footer";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Article_Card_id from "./component/homepage/ArticleCardId";
+import Article_Card_id from "./component/homepage/articles/ArticleCardId";
+
 
 function App() {
   return (
