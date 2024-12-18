@@ -41,7 +41,7 @@ function CommentBody({ articleId }) {
         prev.filter((comment) => comment.comment_id !== commentId)
       );
       
-      toast.success('Comment deleted successfully')
+      toast.warning('Comment deleted successfully')
     })
     .catch(err => toast.error('Something went Wrong'))
   };
@@ -69,6 +69,7 @@ function CommentBody({ articleId }) {
             Post a Comment
           </button>
         </form>
+        
         <h4 className="card-title">Latest Comments</h4>
         {comments.map((comment) => {
           return (
