@@ -23,3 +23,8 @@ return axios.post(`${baseUrl}/articles/${article_id}/comments`,input)
 export const deleteCommmentUrl = (comment_id) => {
     return axios.delete(`${baseUrl}/comments/${comment_id}`)
 }
+// get Topics
+export const getTopics = () => {
+    return axios.get(`${baseUrl}/topics`)
+    .then(res => res.data)
+}
