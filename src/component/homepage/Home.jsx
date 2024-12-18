@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import ArticleCard from './ArticleCard'
+import React, { useEffect, useState } from "react";
+import { getArticles } from "../../api";
+import ArticleCard from "./articles/ArticleCard";
 function Home() {
-  const [article, setArticle] = useState([])
-  const [isLoading,setLoading] = useState(false)
-  const url = 'https://mynew-nc-news.onrender.com/api/articles'
-useEffect(()=>{
-  setLoading(true)
-axios.get(url)
-.then((res)=>{
-setArticle(res.data.article);
-setLoading(false)
-})
-},[])
-if(isLoading){
-    return <>Loading....</>
-}
+  const [article, setArticle] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    getArticles().then((res) => setArticle(res));
+    setLoading(false);
+  }, []);
+
+  if (isLoading) {
+    return <>Loading....</>;
+  }
   return (
-    <>
- <ArticleCard article = {article}/>
-  </>
-  )
+    <React.Fragment>
+      <ArticleCard article={article} />
+    </React.Fragment>
+  );
 }
 
-export default Home
+export default Home;
