@@ -22,6 +22,9 @@ function Nav() {
           <li className="nav-item">
             <Link to={'/users'} className="nav-link"><strong>Users</strong></Link>
           </li>
+          <li className="nav-item">
+            <Link to={'/topics'} className="nav-link"><strong>Topics</strong></Link>
+          </li>
         </ul>
       </div>
     </div>
