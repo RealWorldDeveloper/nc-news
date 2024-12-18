@@ -28,3 +28,7 @@ export const getTopics = () => {
     return axios.get(`${baseUrl}/topics`)
     .then(res => res.data)
 }
+// Update Votes
+export const updateVote = (id,like) => {
+return axios.patch(`${baseUrl}/articles/${id}`, like)
+}

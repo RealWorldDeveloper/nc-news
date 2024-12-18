@@ -45,7 +45,7 @@ function Topic() {
                       </div>
                       <span>
                         <button
-                          className="btn bg-info mt-4"
+                          className="btn bg-success mt-4"
                           onClick={() => filterArticle(topics.slug)}
                         >
                           Find Articles
