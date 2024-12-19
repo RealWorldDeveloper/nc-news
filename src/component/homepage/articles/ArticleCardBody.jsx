@@ -36,7 +36,8 @@ function ArticleCardBody() {
   return (
     <div>
       <h1 className="articleid m-5 ">Article:{articleId.article_id}</h1>
-      <div className="container d-flex justify-content-center align-items-center my-5">
+      <div className="container d-flex flex-column justify-content-center align-items-center my-5">
+        <h1 style={{fontSize:50}}>{articleId.title}</h1>
         <div
           className="card"
           style={{ width: "70rem", animation: "fadeIn 3s" }}
