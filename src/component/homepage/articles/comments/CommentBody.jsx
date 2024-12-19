@@ -6,7 +6,7 @@ import { deleteCommmentUrl } from "../../../../api";
 import { toast } from "react-toastify";
 function CommentBody({ articleId }) {
   const [comments, setComments] = useState([]);
-  const [input, setInput] = useState({ username: "", body: "" });
+  const [input, setInput] = useState({username:'', body:''});
   //Fetch All Comments
   useEffect(() => {
     getAllComments(articleId).then((res) => setComments(res));
@@ -19,31 +19,35 @@ function CommentBody({ articleId }) {
   // Post a Comment
   const postComment = (e) => {
     e.preventDefault();
-    postCommentUrl(articleId, input).then(() => {
+     postCommentUrl(articleId, input).then(() => {
+
       // Fetch updated comments from the server
       getAllComments(articleId)
         .then((res) => {
           setComments(res);
-          toast.success('Comment posted Successfully')
+          toast.success("Comment posted Successfully");
           setInput({ username: "", body: "" });
         })
 
-        .catch((err) => toast.error("Failed to fetch comments:"));
+        .catch((err) => {
+          console.log("Catching error", err);
+
+          toast.error("Failed to fetch comments:");
+        });
     });
   };
 
   // Delete a comment
   const deleteComment = (commentId) => {
     deleteCommmentUrl(commentId)
-    .then((res) => {
-        
-      setComments((prev) =>
-        prev.filter((comment) => comment.comment_id !== commentId)
-      );
-      
-      toast.warning('Comment deleted successfully')
-    })
-    .catch(err => toast.error('Something went Wrong'))
+      .then((res) => {
+        setComments((prev) =>
+          prev.filter((comment) => comment.comment_id !== commentId)
+        );
+
+        toast.warning("Comment deleted successfully");
+      })
+      .catch((err) => toast.error("Something went Wrong"));
   };
   return (
     <div className="row d-flex justify-content-center mt-100 mb-100">
@@ -69,7 +73,7 @@ function CommentBody({ articleId }) {
             Post a Comment
           </button>
         </form>
-        
+
         <h4 className="card-title">Latest Comments</h4>
         {comments.map((comment) => {
           return (

@@ -18,8 +18,8 @@ function TopicFilterCard({ topicFilter}) {
         navigation(`/${id}`)
     }
   return (
-    <div className="container-fluid py-3" style={{ animation: "fadeIn 3s" }}>
-      <div className="row row-cols-1 row-cols-sm-6 g-5">
+    <div className="container-fluid py-3">
+      <div className="row row-cols-1 row-cols-sm-6 g-5" style={{ animation: "fadeIn 3s" }}>
         {topicFilter.map((item) => {
           return (
             <div className="col-sm-2">
