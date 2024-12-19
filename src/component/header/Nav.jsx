@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function Nav() {
   return (
     <>
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary py-3">
     <div className="container-fluid">
     <img
   src= 'logo.png'
@@ -16,13 +16,13 @@ function Nav() {
       </button>
       <div className="collapse navbar-collapse d-flex justify-content-center" id="navbarNavDropdown">
         <ul className="navbar-nav">
-          <li className="nav-item">
+          <li className="nav-item fs-5">
             <Link to={'/'} className="nav-link"><strong>Home</strong></Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item fs-5">
             <Link to={'/users'} className="nav-link"><strong>Users</strong></Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item fs-5">
             <Link to={'/topics'} className="nav-link"><strong>Topics</strong></Link>
           </li>
         </ul>

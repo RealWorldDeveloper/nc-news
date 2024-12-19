@@ -1,6 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 function ArticleCard({ article }) {
+  const formatDate =(created_at) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour24: true,
+    };
+  return new Date(created_at).toLocaleDateString(undefined, options)
+} 
+
   const navigate = useNavigate()
   const handleClick = (id)=>{
   navigate(`/${id}`)
@@ -28,7 +41,7 @@ function ArticleCard({ article }) {
               </h5>
               <h5>
                 created at:
-                <span className="fs-6">{item.created_at}</span>
+                <span className="fs-6"> {formatDate(item.created_at)}</span>
               </h5>
               <button type="button" className="btn btn-info" onClick={()=> handleClick(item.article_id)}>Read More</button>
             </div>

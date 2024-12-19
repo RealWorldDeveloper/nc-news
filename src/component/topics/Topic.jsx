@@ -24,23 +24,23 @@ function Topic() {
 
   return (
     <>
-      <div class="container my-5">
-        <div class="row">
+      <div className="container my-5">
+        <div className="row">
           {topic.map((topics) => {
             return (
-              <div class="col-sm">
-                <div class="card l-bg-orange-dark p-3 h-100">
-                  <div class="card-statistic-3">
-                    <div class="mb-1">
-                      <h5 class="card-title mb-0">Article Topics</h5>
+              <div className="col-sm">
+                <div className="card l-bg-orange-dark p-3 h-100">
+                  <div className="card-statistic-3">
+                    <div className="mb-1">
+                      <h5 className="card-title mb-0">Article Topics</h5>
                     </div>
-                    <div class="row align-items-center mb-2 d-flex">
-                      <div class="col-8">
-                        <h2 class="d-flex align-items-center mb-0">
+                    <div className="row align-items-center mb-2 d-flex">
+                      <div className="col-8">
+                        <h2 className="d-flex align-items-center mb-0">
                           {topics.slug}
                         </h2>
                       </div>
-                      <div class="col-6 text-right">
+                      <div className="col-6 text-right">
                         <span>{topics.description}</span>
                       </div>
                       <span>

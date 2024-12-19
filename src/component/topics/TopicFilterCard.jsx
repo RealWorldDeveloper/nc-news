@@ -1,6 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 function TopicFilterCard({ topicFilter}) {
+  const formatDate =(created_at) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour24: true,
+    };
+  return new Date(created_at).toLocaleDateString(undefined, options)
+} 
     const navigation = useNavigate()
     const readMoreClick = (id) => {
         navigation(`/${id}`)
@@ -33,7 +45,7 @@ function TopicFilterCard({ topicFilter}) {
                   </h5>
                   <h5>
                     created at:
-                    <span className="fs-6">{item.created_at}</span>
+                    <span className="fs-6">{formatDate(item.created_at)}</span>
                   </h5>
                   <h5>
                     Votes: <span className="fs-6">{item.votes}</span>
