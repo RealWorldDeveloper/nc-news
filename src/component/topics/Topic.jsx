@@ -28,7 +28,7 @@ function Topic() {
         <div className="row">
           {topic.map((topics) => {
             return (
-              <div className="col-sm">
+              <div className="col-sm mt-2">
                 <div className="card l-bg-orange-dark p-3 h-100">
                   <div className="card-statistic-3">
                     <div className="mb-1">

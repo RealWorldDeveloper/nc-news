@@ -4,31 +4,32 @@ import { Link } from 'react-router-dom'
 function Nav() {
   return (
     <>
-    <nav className="navbar navbar-expand-lg bg-body-tertiary py-3">
-    <div className="container-fluid">
-    <img
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+  <img
   src= 'logo.png'
   width="60"
   height="60"
   />
-      <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse d-flex justify-content-center" id="navbarNavDropdown">
-        <ul className="navbar-nav">
-          <li className="nav-item fs-5">
-            <Link to={'/'} className="nav-link"><strong>Home</strong></Link>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+       
+        <li className="nav-item fs-5">
+            <Link to={'/'} className="nav-link">Home</Link>
           </li>
-          <li className="nav-item fs-5">
-            <Link to={'/users'} className="nav-link"><strong>Users</strong></Link>
+        <li className="nav-item fs-5">
+            <Link to={'/users'} className="nav-link">Users</Link>
           </li>
-          <li className="nav-item fs-5">
-            <Link to={'/topics'} className="nav-link"><strong>Topics</strong></Link>
+        <li className="nav-item fs-5">
+            <Link to={'/topics'} className="nav-link">Topics</Link>
           </li>
-        </ul>
-      </div>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
       </>
   )
 }
