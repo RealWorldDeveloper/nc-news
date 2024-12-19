@@ -16,8 +16,8 @@ export const getAllComments = (article_id) => {
     .then(res => res.data.comment)
 }
 // Post a comment
-export const postCommentUrl = (article_id, input) =>{
-return axios.post(`${baseUrl}/articles/${article_id}/comments`,input)
+export const postCommentUrl = (article_id, msg) =>{      
+return axios.post(`${baseUrl}/articles/${article_id}/comments`, msg)
 }
 // Delete a comment
 export const deleteCommmentUrl = (comment_id) => {
