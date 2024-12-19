@@ -24,7 +24,7 @@ function Topic() {
 
   return (
     <>
-      <div className="container my-5">
+      <div className="container my-5" style={{ animation: "fadeIn 3s" }}>
         <div className="row">
           {topic.map((topics) => {
             return (
