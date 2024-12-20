@@ -23,9 +23,7 @@ function ArticleCardBody() {
         toast.error("Error loading article");
       })
     }, 1000);
- 
-     
-  }, [article_id, likesCount]);
+  }, []);
 
   return (
     <div>
@@ -33,7 +31,7 @@ function ArticleCardBody() {
         <h2>Please Wait....</h2>
             <div className="spinner mx-3">
             </div>
-        </div>) : (      <div className="container d-flex flex-column justify-content-center align-items-center my-5">
+        </div>) : (<div className="container d-flex flex-column justify-content-center align-items-center my-5">
         <h1 style={{ fontSize: 30 }}>{articleId.title}</h1>
         <div className="card">
           <img

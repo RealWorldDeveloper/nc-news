@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getArticles } from "../../api";
+// import { getArticles } from "../../api";
 import ArticleCard from "./articles/ArticleCardList";
 import SortingArticles from "./articles/SortingArticles";
 import { sortArticles } from "../../utils";
+import { apiClient } from "../../api";
 
 function Home() {
   const [articles, setArticles] = useState([]);
@@ -13,7 +14,7 @@ function Home() {
   useEffect(() => {
     setLoading(true);
     setTimeout(()=>{
-       getArticles().then((res) => {
+       apiClient.get('/articles').then((res) => {  
       setArticles(res.data.article);
       setSortedArticles(res.data.article);
       setLoading(false);
@@ -21,6 +22,7 @@ function Home() {
     },3000)
    
   }, []);
+
 
   useEffect(() => {
     const sorted = sortArticles(articles, sortOption);

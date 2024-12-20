@@ -4,9 +4,7 @@ import { CiFaceFrown } from "react-icons/ci";
 import { updateVote } from "../../../../api";
 import { toast } from "react-toastify";
 function CommentVote({ setLikesCount, likesCount, articleId }) {
-  console.log();
-
-  const incrementLike = () => {
+   const incrementLike = () => {
     setLikesCount((currentLikesCount) => currentLikesCount + 1);
     updateVote(articleId, { inc_votes: 1 }).then((res) => {
       localStorage.setItem("likeCount", likesCount);
