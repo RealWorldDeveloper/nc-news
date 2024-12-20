@@ -3,7 +3,7 @@ const baseUrl = 'https://mynew-nc-news.onrender.com/api'
 // get all Article
 export const getArticles = ()=>{
 return axios.get(`${baseUrl}/articles`)
-.then(res => res.data.article)
+.then(res => res)
 }
 // get Articles by id
 export const getArticlesById = (article_id) => {

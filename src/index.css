@@ -12,3 +12,44 @@
       opacity: 1;
     }
   }
+  .loader-container {
+    width: 10%;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background: transparent;
+    z-index: 1;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 30px solid;
+    border-color: #fe1100 transparent #3d5af1 transparent;
+    border-radius: 50%;
+    animation: spin-anim 1.2s linear infinite;
+}
+
+@keyframes spin-anim {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@media (max-width: 650px){
+  .loader-container{
+    width: 40%;
+  }
+  .spinner {
+    width: 30px;
+    height: 30px;
+    border: 2px solid;
+    border-color: #fe1100 transparent #3d5af1 transparent;
+    border-radius: 50%;
+    animation: spin-anim 1.2s linear infinite;
+}
+}

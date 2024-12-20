@@ -5,6 +5,7 @@ import { getArticles } from "../../api";
 import TopicFilterCard from "./TopicFilterCard";
 function Topic() {
   const [topic, setTopic] = useState([]);
+  const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     getTopics()
       .then((res) => setTopic(res.topics))
@@ -13,13 +14,17 @@ function Topic() {
 
   const [filter, setFilterArticle] = useState([]);
   const filterArticle = (slug) => {
-    getArticles()
-    .then((res) => {
-      setFilterArticle(res.filter((item) => item.topic === slug));
-    })
-    .catch(err => console.log('No topics found', err)
-    )
-    
+    setLoading(true);
+    setTimeout(() => {
+      getArticles()
+        .then((res) => {
+          setFilterArticle(
+            res.data.article.filter((item) => item.topic === slug)
+          );
+          setLoading(false)
+        })
+        .catch((err) => console.log("No topics found", err));
+    }, 1000);
   };
 
   return (
@@ -59,7 +64,12 @@ function Topic() {
           })}
         </div>
       </div>
-      <TopicFilterCard topicFilter={filter} />
+      {isLoading ? (<div className="container loader-container m-4">
+        <h2>Please Wait....</h2>
+            <div className="spinner mx-3">
+            </div>
+        </div>):(<TopicFilterCard topicFilter={filter} />)}
+      
     </>
   );
 }
