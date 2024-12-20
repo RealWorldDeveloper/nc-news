@@ -4,13 +4,27 @@ import { getAllComments } from "../../../../api";
 import { deleteCommmentUrl } from "../../../../api";
 import PostComment from "./PostComment";
 import CommentVote from "./CommentVote";
-
 import { toast } from "react-toastify";
+import { apiClient } from "../../../../api";
 function CommentBody({ articleId,setLikesCount,likesCount}) {
   const [comments, setComments] = useState([]);
+  const formatDate =(created_at) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour24: true,
+    };
+  return new Date(created_at).toLocaleDateString(undefined, options)
+} 
 
   useEffect(() => {
-    getAllComments(articleId).then((res) => setComments(res));
+    getAllComments(articleId).then((res) => {
+      
+      setComments(res)});
   }, []);
 
   const deleteComment = (commentId) => {
@@ -35,7 +49,7 @@ function CommentBody({ articleId,setLikesCount,likesCount}) {
             <div className="card mb-1 py-2">
               <div className="comment-widgets">
                 <div className="d-flex flex-row comment-row">
-                  <div className="p-2">
+                  <div className="px-2">
                     <img
                       src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
                       alt="user"
@@ -44,16 +58,20 @@ function CommentBody({ articleId,setLikesCount,likesCount}) {
                     />
                   </div>
                   <div className="comment-text w-100">
-                    <h6 className="font-medium">{comment.author}</h6>{" "}
-                    <span className="m-b-15 d-block">{comment.body} </span>
+                    <div className="container d-flex justify-content-between">
+                      <h5>{comment.author}</h5>
+                        <h6>
+                        <strong>{formatDate(comment.created_at)}</strong>
+                      </h6>
+                    </div>
+                    
+                    <span className="m-b-15 d-block mx-2">{comment.body} </span>
                     <div className="comment-footer">
-                      <span className="text-muted float-right">
-                        {comments.created_at}
-                      </span>
+                    
                       <br />
                       <button
                         type="button"
-                        className="btn btn-danger my-2"
+                        className="btn btn-danger"
                         onClick={() => deleteComment(comment.comment_id)}
                       >
                         Delete post

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../topics/topic.css";
 import { getTopics } from "../../api";
-import { getArticles } from "../../api";
+// import { getArticles } from "../../api";
 import TopicFilterCard from "./TopicFilterCard";
 function Topic() {
   const [topic, setTopic] = useState([]);
@@ -65,7 +65,7 @@ function Topic() {
         </div>
       </div>
       {isLoading ? (<div className="container loader-container m-4">
-        <h2>Please Wait....</h2>
+        <h2>Loading....</h2>
             <div className="spinner mx-3">
             </div>
         </div>):(<TopicFilterCard topicFilter={filter} />)}

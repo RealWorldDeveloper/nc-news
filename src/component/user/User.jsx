@@ -1,50 +1,37 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-
+import { apiClient } from '../../api'
+import Nav from '../header/Nav'
 function User() {
     const [user, setUser]= useState([])
-    const userUrl = 'https://mynew-nc-news.onrender.com/api/users'
 
     useEffect(()=>{
-        axios.get(userUrl)
-        .then(res => {
-            setUser(res.data.user);
-        })
+        apiClient.get('/users')
+        .then(res => setUser(res.data.user))
     },[])
-  return (
-    <div className="container mt-5" style={{animation: 'fadeIn 3s'}}>
-      <div className="row d-flex justify-content-center">
-        {user.map(users => {
-            return(
-                        <div className="col-md-4 mb-2" >
-              <div className="card py-4 h-100"  >
-                <div className="text-center">
-                  <img
-                    src={users.avatar_url}
-                    width="100"
-                    className="rounded-circle"
-                  />
-                </div>
-
-                <div className="text-center mt-3">
-                  <h5 className="mt-2 mb-0"></h5>
-
-                  <div className="px-4 mt-1">
-                    <h4 className="fonts fs-6">Name: {users.name}  </h4>
-                  </div>
-
-                  <div className="px-4 mt-1">
-                    <p className="fonts fs-6">username: {users.username}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            )
-        })}
     
-       
-      </div>
+  return (
+    <>
+    <div className='container d-flex justify-content-center align-items-center flex-column'style={{height: '60vh'}}>
+      <h1>User Login</h1>
+    <form className='form w-50 border border-dark-subtle p-3 rounded-4'>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">user name</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
+      <div id="emailHelp" class="form-text">We'll never share your username with anyone else.</div>
     </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1"/>
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  </div>
+  </>
   )
 }
 
