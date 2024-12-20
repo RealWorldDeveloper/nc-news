@@ -1,79 +1,34 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { getAllComments } from "../../../../api";
-import { postCommentUrl } from "../../../../api";
 import { deleteCommmentUrl } from "../../../../api";
+import PostComment from "./PostComment";
+import CommentVote from "./CommentVote";
+
 import { toast } from "react-toastify";
-function CommentBody({ articleId }) {
+function CommentBody({ articleId,setLikesCount,likesCount}) {
   const [comments, setComments] = useState([]);
-  const [input, setInput] = useState({username:'', body:''});
-  //Fetch All Comments
+
   useEffect(() => {
     getAllComments(articleId).then((res) => setComments(res));
   }, []);
-  // input handler
-  const onChangeHandeler = (e) => {
-    const { name, value } = e.target;
-    setInput((prev) => ({ ...prev, [name]: value }));
-  };
-  // Post a Comment
-  const postComment = (e) => {
-    e.preventDefault();
-     postCommentUrl(articleId, input).then(() => {
 
-      // Fetch updated comments from the server
-      getAllComments(articleId)
-        .then((res) => {
-          setComments(res);
-          toast.success("Comment posted Successfully");
-          setInput({ username: "", body: "" });
-        })
-
-        .catch((err) => {
-          console.log("Catching error", err);
-
-          toast.error("Failed to fetch comments:");
-        });
-    });
-  };
-
-  // Delete a comment
   const deleteComment = (commentId) => {
     deleteCommmentUrl(commentId)
       .then((res) => {
         setComments((prev) =>
           prev.filter((comment) => comment.comment_id !== commentId)
         );
-
         toast.warning("Comment deleted successfully");
       })
       .catch((err) => toast.error("Something went Wrong"));
   };
+
   return (
     <div className="row d-flex justify-content-center mt-100 mb-100">
       <div className="col-m-4">
-        <form className="card-body text-center" onSubmit={postComment}>
-          <input
-            type="text"
-            className="form-control mb-2"
-            placeholder="Enter your username"
-            name="username"
-            value={input.username}
-            onChange={onChangeHandeler}
-          />
-          <textarea
-            className="form-control mb-4"
-            rows="3"
-            placeholder="Write your comment here..."
-            name="body"
-            value={input.body}
-            onChange={onChangeHandeler}
-          ></textarea>
-          <button type="submit" className="btn btn-success">
-            Post a Comment
-          </button>
-        </form>
-
+        <CommentVote setLikesCount ={setLikesCount} likesCount={likesCount} articleId={articleId}/>
+        <PostComment articleId={articleId} setComments={setComments} />
         <h4 className="card-title">Latest Comments</h4>
         {comments.map((comment) => {
           return (

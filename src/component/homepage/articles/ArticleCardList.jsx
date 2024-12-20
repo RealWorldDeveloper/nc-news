@@ -18,6 +18,7 @@ function ArticleCard({ article }) {
   const handleClick = (id)=>{
   navigate(`/${id}`)
   }
+  
   return (
     <div className="container-fluid py-3" style={{ animation: "fadeIn 3s" }}>
       <h1 className="py-1 fs-1">Articles</h1>

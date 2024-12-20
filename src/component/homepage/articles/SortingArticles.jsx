@@ -2,7 +2,7 @@ import React from "react";
 
 function SortingArticles({ setSortOption }) {
   const handleClick = (e) => {
-    setSortOption(e.target.value); // Send the sort option to the parent
+    setSortOption(e.target.value); 
   };
 
   return (
