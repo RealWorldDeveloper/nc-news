@@ -64,8 +64,8 @@ function Topic() {
           })}
         </div>
       </div>
-      {isLoading ? (<div className="container loader-container m-4">
-        <h2>Loading....</h2>
+      {isLoading ? (<div className="container-fluid loader-container">
+        <h1>Loading</h1>
             <div className="spinner mx-3">
             </div>
         </div>):(<TopicFilterCard topicFilter={filter} />)}

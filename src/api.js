@@ -13,6 +13,8 @@ apiClient.get('/users')
 .then((res) => res.data)
 .catch(err => err);
 
+apiClient.post('/users/adduser')
+
 // get Articles by id
 export const getArticlesById = (article_id) => {
   return axios
