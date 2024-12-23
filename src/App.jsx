@@ -9,6 +9,7 @@ import ArticleCardBody from "./component/homepage/articles/SingleArticleCard";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import User from "./component/user/User";
+import Profile from "./component/user/profile/Profile";
 
 
 
@@ -24,6 +25,7 @@ function App() {
          <Route path="/users" element= {<User/>} />
          <Route path="/user/login" element= {<Login/>} />
          <Route path="/user/register" element= {<Register/>} />
+         <Route path="/user/profile" element= {<Profile/>} />
          <Route path="/topics" element= {<Topic/>} />
         </Routes>
       </BrowserRouter>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getArticlesById } from "../../../api";
+import { apiClient } from "../../../api";
 import CommentBody from "./comments/CommentBody";
 import { toast } from "react-toastify";
 
@@ -13,10 +13,11 @@ function ArticleCardBody() {
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
-        getArticlesById(article_id)
+        apiClient.get(`/articles/${article_id}`)
       .then((res) => {
+        const cardData = res.data.articles[0]
         setLikesCount(likesCount);
-        setArticleId(res);
+        setArticleId(cardData);
         setLoading(false);
       })
       .catch((error) => {

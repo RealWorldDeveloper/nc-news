@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 function Register() {
-    const [inputValue, setInputValue] = useState({username:'',name: '', avatar_url:''})
+    const [inputValue, setInputValue] = useState({username:'',password:'', name: '', avatar_url:''})
     
     const inputChangeHandeler = (e)=>{
         const {name,value} = e.target;
@@ -15,7 +15,7 @@ function Register() {
         apiClient.post('/users/adduser',inputValue)
         .then(res => {            
             toast.success(res.data.msg)
-            setInputValue({username:'',name: '', avatar_url:''})
+            setInputValue({username:'',password:'', name: '', avatar_url:''})
         })
         .catch((err) =>{
         console.log(err);
@@ -53,7 +53,6 @@ function Register() {
                         >
                           <input
                             type="text"
-                            id="form3Example1c"
                             className="form-control"
                             name="username"
                             value={inputValue.username}
@@ -61,6 +60,24 @@ function Register() {
                           />
                           <label className="form-label" for="form3Example1c">
                             User Name
+                          </label>
+                        </div>
+                      </div>
+                      <div className="d-flex flex-row align-items-center mb-4">
+                        <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                        <div
+                          data-mdb-input-init
+                          className="form-outline flex-fill mb-0"
+                        >
+                          <input
+                            type="password"
+                            className="form-control"
+                            name="password"
+                            value={inputValue.password}
+                            onChange={inputChangeHandeler}
+                          />
+                          <label className="form-label" for="form3Example3c">
+                           Password
                           </label>
                         </div>
                       </div>
@@ -73,7 +90,6 @@ function Register() {
                         >
                           <input
                             type="text"
-                            id="form3Example3c"
                             className="form-control"
                             name="name"
                             value={inputValue.name}
@@ -93,7 +109,6 @@ function Register() {
                         >
                           <input
                             type="text"
-                            id="form3Example4c"
                             className="form-control"
                             name="avatar_url"
                             value={inputValue.avatar_url}
