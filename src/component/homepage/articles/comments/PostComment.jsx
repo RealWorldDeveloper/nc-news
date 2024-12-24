@@ -4,6 +4,7 @@ import { postCommentUrl } from "../../../../api";
 import { toast } from "react-toastify";
 import { getAllComments } from "../../../../api";
 function PostComment({ articleId, setComments }) {
+  const [isLogin, setLogin] = useState(true)
   const [input, setInput] = useState({ username: "cooljmessy", body: "" });
   const onChangeHandeler = (e) => {
     const { name, value } = e.target;
@@ -11,7 +12,12 @@ function PostComment({ articleId, setComments }) {
   };
   const postComment = (e) => {
     e.preventDefault();
-    postCommentUrl(articleId, input).then(() => {
+    if(isLogin){
+      toast.info('Please login first ')
+    }
+
+    
+   else{ postCommentUrl(articleId, input).then(() => {
       getAllComments(articleId)
         .then((res) => {
           setComments(res);
@@ -23,6 +29,7 @@ function PostComment({ articleId, setComments }) {
           toast.error("Failed to fetch comments:");
         });
     });
+   }
   };
 
   return (

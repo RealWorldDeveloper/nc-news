@@ -3,24 +3,9 @@ const baseUrl = 'https://mynew-nc-news.onrender.com/api'
 export const apiClient = axios.create({
   baseURL: "https://mynew-nc-news.onrender.com/api",
   timeout: 1000,
+  withCredentials: true
 });
 
-apiClient.get("/articles")
-.then((res) => res.data)
-.catch(err => err);
-
-apiClient.get('/users')
-.then((res) => res.data)
-.catch(err => err);
-
-apiClient.post('/users/adduser')
-
-// get Articles by id
-export const getArticlesById = (article_id) => {
-  return axios
-    .get(`${baseUrl}/articles/${article_id}`)
-    .then((res) => res.data.articles[0]);
-};
 // get All Comments
 export const getAllComments = (article_id) => {
   return axios

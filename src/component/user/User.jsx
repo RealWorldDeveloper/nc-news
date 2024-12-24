@@ -9,6 +9,7 @@ function User() {
         apiClient.get('/users')
         .then(res => setUser(res.data.user))
     },[])
+    console.log(user);
     
   return (
     <>

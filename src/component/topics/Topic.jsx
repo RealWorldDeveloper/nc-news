@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../topics/topic.css";
 import { getTopics } from "../../api";
+import { apiClient } from "../../api";
 // import { getArticles } from "../../api";
 import TopicFilterCard from "./TopicFilterCard";
 function Topic() {
@@ -16,7 +17,7 @@ function Topic() {
   const filterArticle = (slug) => {
     setLoading(true);
     setTimeout(() => {
-      getArticles()
+      apiClient.get('/articles')
         .then((res) => {
           setFilterArticle(
             res.data.article.filter((item) => item.topic === slug)
