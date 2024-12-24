@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { apiClient } from "../../../api";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
     const [inputValue, setInputValue] = useState({username:'',password:'', name: '', avatar_url:''})
+    const navigation = useNavigate()
     
     const inputChangeHandeler = (e)=>{
         const {name,value} = e.target;
@@ -57,6 +59,7 @@ function Register() {
                             name="username"
                             value={inputValue.username}
                             onChange={inputChangeHandeler}
+                            required
                           />
                           <label className="form-label" for="form3Example1c">
                             User Name
@@ -75,6 +78,7 @@ function Register() {
                             name="password"
                             value={inputValue.password}
                             onChange={inputChangeHandeler}
+                            required
                           />
                           <label className="form-label" for="form3Example3c">
                            Password
@@ -94,6 +98,7 @@ function Register() {
                             name="name"
                             value={inputValue.name}
                             onChange={inputChangeHandeler}
+                            required
                           />
                           <label className="form-label" for="form3Example3c">
                             Name
@@ -113,6 +118,7 @@ function Register() {
                             name="avatar_url"
                             value={inputValue.avatar_url}
                             onChange={inputChangeHandeler}
+                            required
                           />
                           <label className="form-label" for="form3Example4c">
                             avatar_url

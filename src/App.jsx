@@ -11,12 +11,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import User from "./component/user/User";
 import Profile from "./component/user/profile/Profile";
 
-
-
 function App() {
   return (
     <>
       <BrowserRouter>
+
         <Header />
         
         <Routes>

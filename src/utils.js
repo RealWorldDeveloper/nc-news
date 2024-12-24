@@ -1,3 +1,4 @@
+
 export  const sortArticles = (articles,sortOption) => {
     const sorted = [...articles];
     sorted.sort((a, b) => {
@@ -11,3 +12,4 @@ export  const sortArticles = (articles,sortOption) => {
     });
         return sorted
   };
+

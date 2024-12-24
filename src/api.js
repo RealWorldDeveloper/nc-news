@@ -3,6 +3,7 @@ const baseUrl = 'https://mynew-nc-news.onrender.com/api'
 export const apiClient = axios.create({
   baseURL: "https://mynew-nc-news.onrender.com/api",
   timeout: 1000,
+  withCredentials: true
 });
 
 // get All Comments
