@@ -3,10 +3,11 @@ import { apiClient } from "../../../api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../UserContext";
+import Cookies from "js-cookie";
 
 function Login() {
   const [input, setInput] = useState({ username: "", password: "" });
-  const {setActive} = useUser()
+  const { setActive, setToken} = useUser();
   const navigation = useNavigate();
   const inputHandler = (e) => {
     const { name, value } = e.target;
@@ -17,9 +18,12 @@ function Login() {
     apiClient
       .post("/users/login", input)
       .then((res) => {
+        
         if (res.data.success) {
-          setActive(true)
-          toast.success(res.data.msg)
+          const token = res.data.token
+          setToken(token);
+          setActive(true);
+          toast.success(res.data.msg);
           navigation("/user/profile");
         }
       })
@@ -41,9 +45,7 @@ function Login() {
         onSubmit={sendLoginForm}
       >
         <div className="mb-3">
-          <label className="form-label">
-            user name
-          </label>
+          <label className="form-label">user name</label>
           <input
             type="text"
             className="form-control"
@@ -71,7 +73,11 @@ function Login() {
           />
         </div>
         <div className="mb-3 form-check">
-          <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="exampleCheck1"
+          />
           <label className="form-check-label" for="exampleCheck1">
             Check me out
           </label>

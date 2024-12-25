@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from "react";
 import "../topics/topic.css";
-import { getTopics } from "../../api";
 import { apiClient } from "../../api";
-// import { getArticles } from "../../api";
+import { useUser } from "../../UserContext";
 import TopicFilterCard from "./TopicFilterCard";
 function Topic() {
-  const [topic, setTopic] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const { topic, setTopic, filter, setFilterArticle } = useUser();
   useEffect(() => {
-    getTopics()
-      .then((res) => setTopic(res.topics))
+    apiClient
+      .get("/topics")
+      .then((res) => setTopic(res.data.topics))
       .catch((err) => console.log("something went wrong", err));
   }, []);
 
-  const [filter, setFilterArticle] = useState([]);
   const filterArticle = (slug) => {
     setLoading(true);
     setTimeout(() => {
-      apiClient.get('/articles')
+      apiClient
+        .get("/articles")
         .then((res) => {
           setFilterArticle(
             res.data.article.filter((item) => item.topic === slug)
           );
-          setLoading(false)
+          setLoading(false);
         })
         .catch((err) => console.log("No topics found", err));
     }, 1000);
@@ -65,12 +65,14 @@ function Topic() {
           })}
         </div>
       </div>
-      {isLoading ? (<div className="container-fluid loader-container">
-        <h1>Loading</h1>
-            <div className="spinner mx-3">
-            </div>
-        </div>):(<TopicFilterCard topicFilter={filter} />)}
-      
+      {isLoading ? (
+        <div className="container-fluid loader-container">
+          <h1>Loading</h1>
+          <div className="spinner mx-3"></div>
+        </div>
+      ) : (
+        <TopicFilterCard topicFilter={filter} />
+      )}
     </>
   );
 }

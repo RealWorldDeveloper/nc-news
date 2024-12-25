@@ -2,14 +2,14 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { apiClient } from '../../api'
 import Nav from '../header/Nav'
+import { useUser } from '../../UserContext'
 function User() {
-    const [user, setUser]= useState([])
+   const {user, setUser} = useUser()
 
     useEffect(()=>{
         apiClient.get('/users')
         .then(res => setUser(res.data.user))
     },[])
-    console.log(user);
     
   return (
     <>
