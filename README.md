@@ -1,7 +1,10 @@
 Northcoder News Article Blog with React & Node.js Backend
+
 🚀 Deployed Version
 You can view the deployed version of the app here.
+
 https://subtle-gaufre-8c35c7.netlify.app/
+
 https://nc-news-gold.vercel.app/
 
 
@@ -14,7 +17,9 @@ Full CRUD (Create, Read, Update, Delete) operations for articles.
 Responsive design using React components and Bootstrap.
 🔧 Backend Repository
 For the backend source code, please visit the backend repository.
+
 https://github.com/RealWorldDeveloper/myNew_NC_News.git
+
 📦 Minimum Node.js Version
 To run this project locally, you need to have Node.js installed. The minimum required version is:
 
