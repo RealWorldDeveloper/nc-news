@@ -4,10 +4,8 @@ import { apiClient } from "../../../../api";
 import { toast } from "react-toastify";
 import { useUser } from "../../../../UserContext";
 function PostComment({ articleId, setComments }) {
-  const { token, setToken , decodeData} = useUser();
-const {username} = decodeData
-const [input, setInput] = useState({ username, body: "" });
-
+  const { token, setToken, setActive } = useUser();
+  const [input, setInput] = useState({ body: "" });
 
   const onChangeHandeler = (e) => {
     const { name, value } = e.target;
@@ -15,25 +13,32 @@ const [input, setInput] = useState({ username, body: "" });
   };
 
   const postComment = (e) => {
-    e.preventDefault();
-    if (!token) {
-      toast.info("Please login first ");} 
-      else {
-      apiClient.post(`/articles/${articleId}/comments`, input).then(() => {
-        apiClient
-          .get(`/articles/${articleId}/comments`)
-          .then((res) => {
-            setComments(res.data.comment);
-            toast.success("Comment posted Successfully");
-            setInput({username, body:''})
-            setToken(token)
-          })
-          .catch((err) => {
-            console.log("Catching error", err);
-            toast.error("Failed to fetch comments:");
-          });
-      });
+    if(!token){
+      toast.info('You need to login first')
     }
+    e.preventDefault();
+    apiClient.get("/users/verify").then((response) => {
+      const { username } = response.data.decode;
+      const result = { username, body: input.body };
+
+      if (response.data.success) {
+        apiClient.post(`/articles/${articleId}/comments`, result).then(() => {
+          apiClient
+            .get(`/articles/${articleId}/comments`)
+            .then((res) => {
+              setComments(res.data.comment);
+              toast.success("Comment posted Successfully");
+              setToken(token);
+            })
+            .catch((err) => {
+              console.log("Catching error", err);
+              toast.error("Failed to fetch comments:");
+            });
+        });
+      } else {
+        toast.warning("login first");
+      }
+    });
   };
 
   return (
