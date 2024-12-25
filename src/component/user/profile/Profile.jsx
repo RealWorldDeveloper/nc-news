@@ -7,7 +7,6 @@ import { useUser } from "../../../UserContext";
 function Profile() {
   const navigation = useNavigate();
   const { SetdecodeData } = useUser();
-
   const [user, setUser] = useState({});
   useEffect(() => {
     apiClient

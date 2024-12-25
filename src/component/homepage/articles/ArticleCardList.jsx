@@ -5,12 +5,28 @@ import { SlLike } from "react-icons/sl";
 import { FcGenericSortingAsc } from "react-icons/fc";
 import { formatDate } from "../../../utils";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../../UserContext";
+import { TbBallFootball } from "react-icons/tb";
+import { FaCode } from "react-icons/fa";
+import { PiCookingPotBold } from "react-icons/pi";
+
+
+
 function ArticleCard({ article }) {
   const navigate = useNavigate();
   const handleClick = (id) => {
     navigate(`/${id}`);
   };
+  const renderingIcon = (topic)=>{
+if(topic === 'football'){
+  return <TbBallFootball fontSize={40} className="border border-dark-subtle p-1 rounded-circle"/>
+}
+if(topic === 'coding'){
+  return <FaCode fontSize={40} className="border border-dark-subtle p-1 rounded-circle"/>
+}
+else{
+  return <PiCookingPotBold fontSize={40} className="border border-dark-subtle p-1 rounded-circle"/>
+}
+  }
   return (
     <div className="container">
       <div className="row mt-n5" style={{ animation: "fadeIn 3s" }}>
@@ -33,7 +49,7 @@ function ArticleCard({ article }) {
                     <a href="#!">{item.title.substring(0, 43)}</a>
                   </h3>
                   <p className="display-30">
-                    <FcGenericSortingAsc fontSize={20} /> {item.topic}
+                    {renderingIcon(item.topic)} {item.topic}
                   </p>
                   <div className="meta meta-style2">
                     <ul className="d-flex justify-content-between">
