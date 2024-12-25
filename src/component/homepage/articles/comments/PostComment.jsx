@@ -1,47 +1,43 @@
 import React from "react";
 import { useState } from "react";
-import { postCommentUrl } from "../../../../api";
+import { apiClient } from "../../../../api";
 import { toast } from "react-toastify";
-import { getAllComments } from "../../../../api";
+import { useUser } from "../../../../UserContext";
 function PostComment({ articleId, setComments }) {
-  const [isLogin, setLogin] = useState(true)
-  const [input, setInput] = useState({ username: "cooljmessy", body: "" });
+  const { token, setToken , decodeData} = useUser();
+const {username} = decodeData
+const [input, setInput] = useState({ username, body: "" });
+
+
   const onChangeHandeler = (e) => {
     const { name, value } = e.target;
     setInput((prev) => ({ ...prev, [name]: value }));
   };
+
   const postComment = (e) => {
     e.preventDefault();
-    if(isLogin){
-      toast.info('Please login first ')
+    if (!token) {
+      toast.info("Please login first ");} 
+      else {
+      apiClient.post(`/articles/${articleId}/comments`, input).then(() => {
+        apiClient
+          .get(`/articles/${articleId}/comments`)
+          .then((res) => {
+            setComments(res.data.comment);
+            toast.success("Comment posted Successfully");
+            setInput({username, body:''})
+            setToken(token)
+          })
+          .catch((err) => {
+            console.log("Catching error", err);
+            toast.error("Failed to fetch comments:");
+          });
+      });
     }
-
-    
-   else{ postCommentUrl(articleId, input).then(() => {
-      getAllComments(articleId)
-        .then((res) => {
-          setComments(res);
-          toast.success("Comment posted Successfully");
-          setInput({ username: "cooljmessy", body: "" });
-        })
-        .catch((err) => {
-          console.log("Catching error", err);
-          toast.error("Failed to fetch comments:");
-        });
-    });
-   }
   };
 
   return (
     <form className="card-body text-center" onSubmit={postComment}>
-      <input
-        type="text"
-        className="form-control mb-2"
-        placeholder="Enter your username"
-        name="username"
-        value={input.username}
-        onChange={onChangeHandeler}
-      />
       <textarea
         className="form-control mb-4"
         rows="3"

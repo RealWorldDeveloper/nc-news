@@ -8,9 +8,15 @@ import { useUser } from "../../UserContext";
 
 function Nav() {
   const navigation = useNavigate();
- const {isActive,setActive} = useUser()
+  const {
+    isActive,
+    setActive,
+    setToken,
+    profileImg,
+    setProfileImg,
+    SetdecodeData,
+  } = useUser();
 
-  const [profileImg, setProfileImg] = useState("");
   useEffect(() => {
     apiClient.get("/users/verify").then((res) => {
       if (res.data.success) {
@@ -25,12 +31,13 @@ function Nav() {
   const handleLogout = () => {
     apiClient.post("/users/logout").then((res) => {
       setActive(false);
+      setToken("");
+      setProfileImg("");
+      SetdecodeData({});
       toast.success(res.data.msg);
       navigation("/");
     });
   };
-
-
 
   return (
     <>
@@ -38,7 +45,7 @@ function Nav() {
         className="navbar navbar-expand-lg bg-body-tertiary"
         style={{ animation: "fadeIn 3s" }}
       >
-        <div class="container-fluid">
+        <div className="container-fluid">
           <img
             src="/logo.png"
             className="rounded-circle border border-dark-subtle p-1"
@@ -46,7 +53,7 @@ function Nav() {
             loading="lazy"
           />
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -54,10 +61,10 @@ function Nav() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-2">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-2">
               <li className="nav-item fs-5">
                 <Link to={"/"} className="nav-link">
                   Home
@@ -74,9 +81,12 @@ function Nav() {
                 </Link>
               </li>
             </ul>
-            <div class="d-flex">
+            <div className="d-flex">
               {isActive ? (
-                <div className="d-flex justify-content-center align-items-center" style={{ animation: "fadeIn 3s" }}>
+                <div
+                  className="d-flex justify-content-center align-items-center"
+                  style={{ animation: "fadeIn 3s" }}
+                >
                   <div className="login border border-dark-subtle rounded-circle p-1">
                     <img
                       src={profileImg}

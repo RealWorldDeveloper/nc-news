@@ -3,8 +3,11 @@ import "./profile.css";
 import { apiClient } from "../../../api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useUser } from "../../../UserContext";
 function Profile() {
   const navigation = useNavigate();
+  const { SetdecodeData } = useUser();
+
   const [user, setUser] = useState({});
   useEffect(() => {
     apiClient
@@ -12,6 +15,8 @@ function Profile() {
       .then((res) => {
         if (res.data.success) {
           navigation("/user/profile");
+          SetdecodeData(res.data.decode);
+
           setUser(res.data.decode);
         } else {
           navigation("/user/login");
@@ -73,7 +78,13 @@ function Profile() {
           </div>
           <div className="col-lg-6">
             <div className="about-avatar">
-              <img src={user.image} title="" alt="" height={300} className="image border rounded-5"/>
+              <img
+                src={user.image}
+                title=""
+                alt=""
+                height={300}
+                className="image border rounded-5"
+              />
             </div>
           </div>
         </div>

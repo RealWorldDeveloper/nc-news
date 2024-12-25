@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
 import { FcLike } from "react-icons/fc";
 import { CiFaceFrown } from "react-icons/ci";
-import { updateVote } from "../../../../api";
+import { apiClient, updateVote } from "../../../../api";
 import { toast } from "react-toastify";
 function CommentVote({ setLikesCount, likesCount, articleId }) {
 
 useEffect(()=>{
   const getCount = localStorage.getItem('likeCount')
-  console.log(getCount);
-  
   if(getCount){
     setLikesCount(parseInt(getCount,10))
   } 
@@ -23,13 +21,15 @@ useEffect(()=>{
       localStorage.setItem("likeCount", localStorageLike);
       return localStorageLike
     });
-    updateVote(articleId, { inc_votes: 1 }).then((res) => {
+    apiClient.patch(`/articles/${articleId}`,{ inc_votes: +1 } )
+    .then(() => {
       toast("Thanks for a Like 💚");
     });
   };
   const decrementLike = () => {
     setLikesCount((currentLikesCount) => currentLikesCount - 1);
-    updateVote(articleId, { inc_votes: -1 }).then((res) =>
+    apiClient.patch(`/articles/${articleId}`,{ inc_votes: -1 } )
+    .then(() =>
       toast.error("Sorry for disappointing 🥴")
     );
   };

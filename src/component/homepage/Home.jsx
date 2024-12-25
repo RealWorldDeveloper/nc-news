@@ -13,34 +13,33 @@ function Home() {
 
   useEffect(() => {
     setLoading(true);
-    setTimeout(()=>{
-       apiClient.get('/articles').then((res) => {  
-      setArticles(res.data.article);
-      setSortedArticles(res.data.article);
-      setLoading(false);
-    })
-    },3000)
-   
+    setTimeout(() => {
+      apiClient.get("/articles").then((res) => {
+        setArticles(res.data.article);
+        setSortedArticles(res.data.article);
+        setLoading(false);
+      });
+    }, 2000);
   }, []);
-
 
   useEffect(() => {
     const sorted = sortArticles(articles, sortOption);
     setSortedArticles(sorted);
   }, [sortOption, articles]);
 
-
   return (
     <React.Fragment>
-      {isLoading ? (<div className="container loader-container m-4">
-        <h2>Please Wait....</h2>
-            <div className="spinner mx-3">
-            </div>
-        </div>): (<>
+      {isLoading ? (
+        <div className="container loader-container m-4">
+          <h2>Please Wait....</h2>
+          <div className="spinner mx-3"></div>
+        </div>
+      ) : (
+        <>
           <SortingArticles setSortOption={setSortOption} />
-        <ArticleCard article={sortedArticles} />
-        </>)}
-      
+          <ArticleCard article={sortedArticles} />
+        </>
+      )}
     </React.Fragment>
   );
 }
